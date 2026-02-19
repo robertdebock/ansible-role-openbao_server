@@ -1,0 +1,18 @@
+---
+# Assertions for openbao_server variables
+
+- name: assert | Test openbao_server_config
+  ansible.builtin.assert:
+    that:
+      - openbao_server_config is string
+    quiet: true
+  when:
+    - openbao_server_config is defined
+
+- name: assert | Test openbao_server_environment
+  ansible.builtin.assert:
+    that:
+      - openbao_server_environment is mapping
+    quiet: true
+  when:
+    - openbao_server_environment is defined

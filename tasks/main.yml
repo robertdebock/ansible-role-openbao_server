@@ -1,0 +1,42 @@
+---
+# tasks file for openbao_server
+
+- name: Import assert.yml
+  ansible.builtin.import_tasks:
+    file: assert.yml
+  run_once: true
+  delegate_to: localhost
+
+- name: Configure OpenBao
+  ansible.builtin.template:
+    src: openbao.hcl.j2
+    dest: /etc/openbao/openbao.hcl
+    owner: openbao
+    group: openbao
+    mode: "0600"
+    validate: "bao operator validate-config -config %s"
+
+  when:
+    - openbao_server_config is defined
+    - openbao_server_config | length > 0
+  notify:
+    - Restart OpenBao
+
+- name: Configure OpenBao environment variables
+  ansible.builtin.template:
+    src: openbao.env.j2
+    dest: /etc/openbao/openbao.env
+    owner: openbao
+    group: openbao
+    mode: "0600"
+  when:
+    - openbao_server_environment is defined
+    - openbao_server_environment | length > 0
+  notify:
+    - Restart OpenBao
+
+- name: Manage OpenBao service
+  ansible.builtin.systemd:
+    name: openbao
+    state: started
+    enabled: true

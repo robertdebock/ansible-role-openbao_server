@@ -1,0 +1,32 @@
+---
+# defaults file for openbao_server
+
+# OpenBao server configuration.
+# All OpenBao server settings are contained in this dictionary.
+#
+# Example configuration:
+# openbao_server_config: |
+#   ui            = true
+#   cluster_addr  = "https://127.0.0.1:8201"
+#   api_addr      = "https://127.0.0.1:8200"
+
+#   storage "raft" {
+#     path = "/path/to/raft/data"
+#     node_id = "raft_node_1"
+#   }
+
+#   listener "tcp" {
+#     address       = "127.0.0.1:8200"
+#     tls_cert_file = "/path/to/full-chain.pem"
+#     tls_key_file  = "/path/to/private-key.pem"
+#   }
+
+#   telemetry {
+#     statsite_address = "127.0.0.1:8125"
+#     disable_hostname = true
+#   }
+
+
+# A map of environment variables to set for the OpenBao server.
+# openbao_server_environment:
+#   SOME_VARIABLE: "some_value"

@@ -1,0 +1,16 @@
+---
+argument_specs:
+  main:
+    short_description: "Install and configure openbao_server on your system."
+    description: >
+      Install and configure openbao_server on your system.
+    author: Robert de Bock
+    options:
+      openbao_server_config:
+        type: "str"
+        default: ""
+        description: "OpenBao server configuration dictionary containing all server settings."
+      openbao_server_environment:
+        type: "dict"
+        default: {}
+        description: "A map of environment variables to set for the OpenBao server."

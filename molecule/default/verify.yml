@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Initialize OpenBao
+      ansible.builtin.command: bao operator init -format json
+      environment:
+        BAO_ADDR: https://127.0.0.1:8200
+        BAO_SKIP_VERIFY: "true"
+      changed_when: true

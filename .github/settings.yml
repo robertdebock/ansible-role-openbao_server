@@ -1,0 +1,8 @@
+---
+#
+# Ansible managed
+#
+repository:
+  description: Configure OpenBao (server) on your system.
+  homepage: https://robertdebock.nl/
+  topics: openbaoserver, application, cloud, database, development, infrastructure, linux, monitoring, networking, storage, security, system, tools, windows, ansible, molecule, playbook
