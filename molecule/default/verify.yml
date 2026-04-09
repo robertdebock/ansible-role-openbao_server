@@ -5,6 +5,21 @@
   gather_facts: true
 
   tasks:
+    - name: Verify OpenBao storage directory exists
+      ansible.builtin.stat:
+        path: /opt/openbao/data
+      register: openbao_server_storage_directory
+
+    - name: Assert OpenBao storage directory properties
+      ansible.builtin.assert:
+        that:
+          - openbao_server_storage_directory.stat.exists
+          - openbao_server_storage_directory.stat.isdir
+          - openbao_server_storage_directory.stat.pw_name == "openbao"
+          - openbao_server_storage_directory.stat.gr_name == "openbao"
+          - openbao_server_storage_directory.stat.mode == "0700"
+        quiet: true
+
     - name: Initialize OpenBao
       ansible.builtin.command: bao operator init -format json
       environment:

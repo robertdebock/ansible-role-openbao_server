@@ -19,6 +19,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.openbao_server
+      openbao_server_directories:
+        - /opt/openbao/data
       openbao_server_config: |
         # Copyright (c) HashiCorp, Inc.
         # SPDX-License-Identifier: MPL-2.0
@@ -77,6 +79,13 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 
 # A map of environment variables to set for the OpenBao server.
 openbao_server_environment: {}
+
+# A list of directories to create for OpenBao storage.
+# This is useful for storage backends like raft/file where the path
+# in openbao_server_config must exist before the service starts.
+# openbao_server_directories:
+#   - /opt/openbao/data
+openbao_server_directories: []
 
 # OpenBao server configuration.
 # All OpenBao server settings are contained in this dictionary.

@@ -7,6 +7,17 @@
   run_once: true
   delegate_to: localhost
 
+- name: Create OpenBao storage directories
+  ansible.builtin.file:
+    path: "{{ openbao_server_directory }}"
+    state: directory
+    owner: openbao
+    group: openbao
+    mode: "0700"
+  loop: "{{ openbao_server_directories }}"
+  loop_control:
+    loop_var: openbao_server_directory
+
 - name: Configure OpenBao
   ansible.builtin.template:
     src: openbao.hcl.j2

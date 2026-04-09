@@ -14,3 +14,8 @@ argument_specs:
         type: "dict"
         default: {}
         description: "A map of environment variables to set for the OpenBao server."
+      openbao_server_directories:
+        type: "list"
+        elements: "str"
+        default: []
+        description: "A list of directories to create for OpenBao storage backends."

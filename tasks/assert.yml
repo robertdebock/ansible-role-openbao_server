@@ -16,3 +16,14 @@
     quiet: true
   when:
     - openbao_server_environment is defined
+
+- name: assert | Test openbao_server_directories
+  ansible.builtin.assert:
+    that:
+      - openbao_server_directories is iterable
+      - openbao_server_directories is not string
+      - openbao_server_directories | select("string") | list | length == openbao_server_directories | length
+    quiet: true
+  when:
+    - openbao_server_directories is defined
+
