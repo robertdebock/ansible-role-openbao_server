@@ -26,4 +26,3 @@
     quiet: true
   when:
     - openbao_server_directories is defined
-
