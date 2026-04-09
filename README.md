@@ -75,6 +75,9 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 ---
 # defaults file for openbao_server
 
+# A map of environment variables to set for the OpenBao server.
+openbao_server_environment: {}
+
 # OpenBao server configuration.
 # All OpenBao server settings are contained in this dictionary.
 #

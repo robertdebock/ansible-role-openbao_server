@@ -1,6 +1,9 @@
 ---
 # defaults file for openbao_server
 
+# A map of environment variables to set for the OpenBao server.
+openbao_server_environment: {}
+
 # OpenBao server configuration.
 # All OpenBao server settings are contained in this dictionary.
 #
