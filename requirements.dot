@@ -1,0 +1,11 @@
+digraph PhiloDilemma {
+  label = "Robert de Bock" ;
+  overlap=false
+  {
+    "openbao_server" [fillcolor=yellow style=filled penwidth=3]
+    "robertdebock.bootstrap" [fillcolor=green style=filled]
+    "robertdebock.openbao" [fillcolor=green style=filled]
+  }
+  "openbao_server" -> "robertdebock.bootstrap"
+  "openbao_server" -> "robertdebock.openbao"
+}
