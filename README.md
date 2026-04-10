@@ -30,7 +30,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         ui = true
 
         storage "file" {
-          path = "/opt/openbao/data"
+          path = "{{ openbao_server_directories | default([]) | first | default('/opt/openbao/data') }}"
         }
 
         # HTTP listener
