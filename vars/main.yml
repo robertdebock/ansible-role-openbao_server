@@ -1,0 +1,9 @@
+---
+# vars file for openbao_server
+
+# The Debian package reads /etc/openbao, the rpm package starts `bao server -config=/etc/openbao.d`.
+_openbao_server_configuration_directory:
+  default: /etc/openbao
+  RedHat: /etc/openbao.d
+
+openbao_server_configuration_directory: "{{ _openbao_server_configuration_directory[ansible_facts['os_family']] | default(_openbao_server_configuration_directory['default']) }}"

@@ -18,10 +18,18 @@
   loop_control:
     loop_var: openbao_server_directory
 
+- name: Create the OpenBao configuration directory
+  ansible.builtin.file:
+    path: "{{ openbao_server_configuration_directory }}"
+    state: directory
+    owner: openbao
+    group: openbao
+    mode: "0750"
+
 - name: Configure OpenBao
   ansible.builtin.template:
     src: openbao.hcl.j2
-    dest: /etc/openbao/openbao.hcl
+    dest: "{{ openbao_server_configuration_directory }}/openbao.hcl"
     owner: openbao
     group: openbao
     mode: "0600"
@@ -36,7 +44,7 @@
 - name: Configure OpenBao environment variables
   ansible.builtin.template:
     src: openbao.env.j2
-    dest: /etc/openbao/openbao.env
+    dest: "{{ openbao_server_configuration_directory }}/openbao.env"
     owner: openbao
     group: openbao
     mode: "0600"
