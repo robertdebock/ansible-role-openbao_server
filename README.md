@@ -65,6 +65,38 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.openbao
+
+  tasks:
+    # The Debian package generates a self-signed certificate, the rpm package does not.
+    - name: Create the TLS directory
+      ansible.builtin.file:
+        path: /opt/openbao/tls
+        state: directory
+        owner: openbao
+        group: openbao
+        mode: "0750"
+
+    - name: Install openssl
+      ansible.builtin.package:
+        name: openssl
+        state: present
+
+    - name: Create a self-signed certificate
+      ansible.builtin.command:
+        cmd: >-
+          openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost"
+          -keyout /opt/openbao/tls/tls.key -out /opt/openbao/tls/tls.crt
+        creates: /opt/openbao/tls/tls.crt
+
+    - name: Set the ownership of the certificate files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        owner: openbao
+        group: openbao
+        mode: "0640"
+      loop:
+        - /opt/openbao/tls/tls.crt
+        - /opt/openbao/tls/tls.key
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -149,11 +181,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|jammy, noble|
 
-The minimum version of Ansible required is 2.12, tests have been done on:
-
-- The previous version.
-- The current version.
-- The development version.
+The minimum version of Ansible (ansible-core) required is 2.20, tests are done with the latest release of ansible-core.
 
 If you find issues, please register them on [GitHub](https://github.com/robertdebock/ansible-role-openbao_server/issues).
 
